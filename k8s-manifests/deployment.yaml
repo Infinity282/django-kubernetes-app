@@ -26,9 +26,9 @@ spec:
         - containerPort: 8000
         envFrom:
         - configMapRef:
-          name: django-config
+            name: django-config
         - secretRef:
-          name: django-secrets
+            name: django-secrets
         livenessProbe:
           httpGet:
             path: /ping/

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: django-app
-        image: infinity282/django-kubernetes-app:latest
+        image: ghcr.io/infinity282/django-kubernetes-app:latest
         ports:
         - containerPort: 8000
         envFrom:

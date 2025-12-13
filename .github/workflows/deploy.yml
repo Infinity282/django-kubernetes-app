@@ -16,7 +16,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-
       # - name: Set up Python
       #   uses: actions/setup-python@v4
       #   with:
@@ -96,7 +95,7 @@ jobs:
 
           # Обновляем образ в deployment
           kubectl set image deployment/django-deployment \
-            django-app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            django-app=ghcr.io/infinity282/django-kubernetes-app:latest \
             -n ${{ env.K8S_NAMESPACE }}
 
           # Ждем пока поды перезапустятся

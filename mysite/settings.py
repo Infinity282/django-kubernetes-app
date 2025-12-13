@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ztl2v05ozdjc#2)!0g(t=n!tkmntg-qjvn%m&^rnzu3)zj!=s*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -89,10 +89,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
-
-
-def get_hostname():
-    return socket.gethostname()
 
 
 # Password validation

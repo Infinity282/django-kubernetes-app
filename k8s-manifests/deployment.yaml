@@ -1,4 +1,4 @@
-piVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django-deployment
@@ -21,14 +21,14 @@ spec:
     spec:
       containers:
       - name: django-app
-        image: Infinity282/django-kubernetes-app:latest
+        image: ghcr.io/infinity282/django-kubernetes-app:latest
         ports:
         - containerPort: 8000
         envFrom:
         - configMapRef:
-          name: django-config
+            name: django-config
         - secretRef:
-          name: django-secrets
+            name: django-secrets
         livenessProbe:
           httpGet:
             path: /ping/

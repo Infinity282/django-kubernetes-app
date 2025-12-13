@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: django-app
-        image: vsmatalin/django-kubernetes-app:latest
+        image: Infinity282/django-kubernetes-app:latest
         ports:
         - containerPort: 8000
         envFrom:

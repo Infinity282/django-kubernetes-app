@@ -25,8 +25,8 @@ jobs:
         outputs: |
           type=registry,ref=192.168.0.115:30500/django-app:latest,insecure=true
           type=registry,ref=192.168.0.115:30500/django-app:${{ github.sha }},insecure=true
-        cache-from: type=registry,ref=192.168.0.115:30500/django-app:buildcache
-        cache-to: type=registry,ref=192.168.0.115:30500/django-app:buildcache,mode=max
+        cache-from: type=registry,ref=192.168.0.115:30500/django-app:buildcache,insecure=true
+        cache-to: type=registry,ref=192.168.0.115:30500/django-app:buildcache,mode=max,insecure=true
 
   deploy-with-helm:
     needs: build-and-push

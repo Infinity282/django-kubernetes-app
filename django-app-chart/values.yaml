@@ -55,3 +55,8 @@ vault:
   enabled: false
   address: "http://vault.vault.svc.cluster.local:8200"
   secretPath: "secret/data/django-app"
+
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true

@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: your-domain.com # Заменить на реальный домен или IP
+    - host: your-domain.com
       http:
         paths:
           - path: /

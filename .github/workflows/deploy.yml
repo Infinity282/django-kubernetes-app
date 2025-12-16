@@ -20,6 +20,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
+        buildkitd-flags: --allow-insecure-entitlement security.insecure
         context: .
         platforms: linux/amd64
         push: true

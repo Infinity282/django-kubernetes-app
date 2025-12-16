@@ -17,18 +17,32 @@ jobs:
     - name: Log in to private registry
       run: |
         docker login ${{ env.REGISTRY }} -u admin -p admin123
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        buildkitd-flags: --allow-insecure-entitlement security.insecure
-        context: .
-        platforms: linux/amd64
-        push: true
-        tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-        cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,insecure=true
-        cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max,insecure=true
+
+    - name: Build and push image (HTTP registry)
+      run: |
+        IMAGE_TAG=${GITHUB_SHA}
+
+        docker buildx build \
+          --platform linux/amd64 \
+          --push \
+          --provenance=false \
+          --tag ${REGISTRY}/${IMAGE_NAME}:latest \
+          --tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} \
+          --cache-from type=registry,ref=${REGISTRY}/${IMAGE_NAME}:buildcache,insecure=true \
+          --cache-to type=registry,ref=${REGISTRY}/${IMAGE_NAME}:buildcache,mode=max,insecure=true \
+          .
+
+#    - name: Build and push Docker image
+#      uses: docker/build-push-action@v5
+#      with:
+#        context: .
+#        platforms: linux/amd64
+#        push: true
+#        tags: |
+#          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+#          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+#        cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,insecure=true
+#        cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max,insecure=true
 
   deploy-with-helm:
     needs: build-and-push

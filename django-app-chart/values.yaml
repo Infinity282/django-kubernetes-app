@@ -3,7 +3,7 @@ global:
 
 # Image settings
 image:
-  repository: "<NODE_IP>:30500/django-app" # Приватный registry
+  repository: "192.168.0.115:30500/django-app" # Приватный registry
   tag: "latest"
   pullPolicy: IfNotPresent
 
@@ -12,21 +12,19 @@ app:
   replicas: 3
   serviceType: ClusterIP
   port: 8000
-
-# Resource limits
-resources:
-  requests:
-    memory: "128Mi"
-    cpu: "100m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
 
 # Environment variables
-env:
-  DEBUG: "False"
-  ALLOWED_HOSTS: "*"
-  DB_HOST: "{{ .Release.Name }}-postgresql"
+  env:
+    DEBUG: "False"
+    ALLOWED_HOSTS: "*"
+    DB_HOST: "{{ .Release.Name }}-postgresql"
 
 # Ingress configuration
 ingress:

@@ -18,19 +18,19 @@ jobs:
       run: |
         docker login ${{ env.REGISTRY }} -u admin -p admin123
 
-    - name: Build and push image (HTTP registry)
-      run: |
-        IMAGE_TAG=${GITHUB_SHA}
-
-        docker buildx build \
-          --platform linux/amd64 \
-          --push \
-          --provenance=false \
-          --tag ${REGISTRY}/${IMAGE_NAME}:latest \
-          --tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} \
-          --cache-from type=registry,ref=${REGISTRY}/${IMAGE_NAME}:buildcache \
-          --cache-to type=registry,ref=${REGISTRY}/${IMAGE_NAME}:buildcache,mode=max \
-          .
+#    - name: Build and push image (HTTP registry)
+#      run: |
+#        IMAGE_TAG=${GITHUB_SHA}
+#
+#        docker buildx build \
+#          --platform linux/amd64 \
+#          --push \
+#          --provenance=false \
+#          --tag ${REGISTRY}/${IMAGE_NAME}:latest \
+#          --tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} \
+#          --cache-from type=registry,ref=${REGISTRY}/${IMAGE_NAME}:buildcache \
+#          --cache-to type=registry,ref=${REGISTRY}/${IMAGE_NAME}:buildcache,mode=max \
+#          .
 
 #    - name: Build and push Docker image
 #      uses: docker/build-push-action@v5

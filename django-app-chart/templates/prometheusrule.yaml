@@ -14,4 +14,4 @@ spec:
         severity: critical
       annotations:
         summary: "Django application is down"
-        description: "Pod {{ $labels.pod }} is not responding"
+        description: "Pod is not responding"

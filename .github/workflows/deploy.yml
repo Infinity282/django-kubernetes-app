@@ -22,12 +22,11 @@ jobs:
       with:
         context: .
         platforms: linux/amd64
-        push: true
-        tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,insecure=true
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }},insecure=true
-        cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-        cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+        outputs: |
+          type=registry,ref=192.168.0.115:30500/django-app:latest,insecure=true
+          type=registry,ref=192.168.0.115:30500/django-app:${{ github.sha }},insecure=true
+        cache-from: type=registry,ref=192.168.0.115:30500/django-app:buildcache
+        cache-to: type=registry,ref=192.168.0.115:30500/django-app:buildcache,mode=max
 
   deploy-with-helm:
     needs: build-and-push

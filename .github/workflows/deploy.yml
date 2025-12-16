@@ -24,11 +24,10 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,insecure=true
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }},insecure=true
         cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
         cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
-        allow-insecure-registry: true
 
   deploy-with-helm:
     needs: build-and-push
